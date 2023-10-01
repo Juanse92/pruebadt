@@ -1,0 +1,120 @@
+<form [formGroup]="form">
+    <p-panel>
+        <ng-template pTemplate="header"> <div class="headerPanel"><h4>REGISTRO DE EMPRESA</h4><span style="left:0px;">Datos obligatorios marcados con(*)</span></div></ng-template>
+        <span style="font-size:large;font-weight: bold;">Datos de la empresa</span>
+        <div class="form-group row">
+            <label for="tipoemp" class="col-form-label col-sm-12 col-md-2">Tipo de documento*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione el tipo" [filter]="true" [options]="tipoDocumentoEmpresas"  optionLabel="label" formControlName="tipoemp"></p-dropdown>
+            </div>
+            <div class="col-sm-12 col-md-1">&nbsp;</div>
+            <label for="numeroemp" class="col-form-label col-sm-12 col-md-2">No. documento*:</label>
+            <div class="col-sm-12 col-md-2">
+                <input type="number" formControlName="numeroemp">
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="nombreemp" class="col-form-label col-sm-12 col-md-2">Nombre*:</label>
+            <div class="col-sm-12 col-md-2">
+                <input type="text" formControlName="nombreemp">
+            </div>
+            <div class="col-sm-12 col-md-2">&nbsp;</div>
+            <label for="direccionemp" class="col-form-label col-sm-12 col-md-2">Dirección*:</label>
+            <div class="col-sm-12 col-md-2">
+                <input type="text" formControlName="direccionemp">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="paisemp" class="col-form-label col-sm-12 col-md-2">Pais*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione el pais" [filter]="true" [options]="paises"  optionLabel="label" formControlName="paisemp"></p-dropdown>
+            </div>
+            <div class="col-sm-12 col-md-1">&nbsp;</div>
+            <label for="departamemp" class="col-form-label col-sm-12 col-md-2">Departamento*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione el departamento" [filter]="true" [options]="departamentos"  optionLabel="label" formControlName="departamemp"></p-dropdown>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label for="ciudademp" class="col-form-label col-sm-12 col-md-2">Cidudad*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione la ciudad" [filter]="true" [options]="cidudades"  optionLabel="label" formControlName="ciudademp"></p-dropdown>
+            </div>
+            <div class="col-sm-12 col-md-1">&nbsp;</div>
+            <label for="telefonoemp" class="col-form-label col-sm-12 col-md-2">Teléfono*:</label>
+            <div class="col-sm-12 col-md-2">
+                <input type="number" formControlName="telefonoemp">
+            </div>
+        </div>
+
+        <hr>
+
+        <span style="font-size:large;font-weight: bold;">Datos del representante legal</span>
+
+        <div class="form-group row">
+            <label for="tipoRep" class="col-form-label col-sm-12 col-md-2">Tipo de documento*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione el tipo" [filter]="true" [options]="tipoDocumentoPersona"  optionLabel="label" formControlName="tipoRep"></p-dropdown>
+            </div>
+            <div class="col-sm-12 col-md-1">&nbsp;</div>
+            <label for="numeRep" class="col-form-label col-sm-12 col-md-2">Numero*:</label>
+            <div class="col-sm-12 col-md-2">
+                <input type="number" formControlName="numeRep">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="nombreRep" class="col-form-label col-sm-12 col-md-2">Nombre completo*:</label>
+            <div class="col-sm-12 col-md-3">
+                <input type="text" formControlName="nombreRep">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="direccionRep" class="col-form-label col-sm-12 col-md-2">Dirección*:</label>
+            <div class="col-sm-12 col-md-3">
+                <input type="text" formControlName="direccionRep">
+            </div>
+            <div class="col-sm-12 col-md-1">&nbsp;</div>
+            <label for="teleRep" class="col-form-label col-sm-12 col-md-2">Teléfono*:</label>
+            <div class="col-sm-12 col-md-2">
+                <input type="number" formControlName="teleRep">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="paisRep" class="col-form-label col-sm-12 col-md-2">País*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione el país" [filter]="true" [options]="paises"  optionLabel="label" formControlName="paisRep"></p-dropdown>
+            </div>
+            <div class="col-sm-12 col-md-1">&nbsp;</div>
+            <label for="deparRep" class="col-form-label col-sm-12 col-md-2">Departamento*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione el departamento" [filter]="true" [options]="departamentos"  optionLabel="label" formControlName="deparRep"></p-dropdown>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ciudadRep" class="col-form-label col-sm-12 col-md-2">Ciudad*:</label>
+            <div class="col-sm-12 col-md-3">
+                <p-dropdown placeholder="Seleccione la ciudad" [filter]="true" [options]="cidudades"  optionLabel="label" formControlName="ciudadRep"></p-dropdown>
+            </div>
+        </div>
+    </p-panel>
+</form>
+
+<ng-container *ngIf="!flagEditar">
+    <button pButton type="button" 
+        icon="pi pi-save" 
+        title="Guardar empresa" 
+        class="float-btn"
+        (click)="guardarEmp()">
+    </button>
+</ng-container>
+<ng-container *ngIf="flagEditar">
+    <button pButton type="button" 
+        icon="pi pi-pencil" 
+        title="Guardar empresa" 
+        class="float-btn p-button-success"
+        (click)="update()">
+    </button>
+</ng-container>

@@ -1,0 +1,24 @@
+  
+  <div style="width: 100%; background-color: #f0f0f0; height:2cm; display:flex; justify-content: space-between;"> 
+    <div style="background-color:#212944;width:1.5cm">
+      <button pButton class="button-menu"  type="button" (click)="sidebarVisible = true" icon="pi pi-chevron-right"></button>
+    </div>
+    <div style="margin: auto;">
+      <h1>Prueba Datatools</h1>
+    </div>
+    <p-dropdown [(ngModel)]="selectEmpresa"  (click)='menuIn()' [options]="empresas" (onChange)="actualizarmenu()" optionLabel="label"></p-dropdown>
+  </div>
+  
+<div class="posicion-menu">
+  <br>
+  <p-menu [model]="items2" [style]="{'background-color':'#212944','color':'white','width':'100%'}"></p-menu>
+</div>
+
+<p-sidebar [(visible)]="sidebarVisible" position="left" [style]="{'background-color':'#212944','color':'white'}">
+  <ng-template pTemplate="header">{{selectEmpresa.label}}</ng-template>
+  <hr>
+  <ng-template pTemplate="content">
+    <p-menu [model]="items" [style]="{'background-color':'#212944','color':'white','width':'100%'}"></p-menu>
+  </ng-template>
+  <!-- <ng-template pTemplate="footer" >Footer Content</ng-template> -->
+</p-sidebar>

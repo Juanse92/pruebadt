@@ -1,0 +1,38 @@
+:host ::ng-deep .p-dropdown{
+  width: 5cm;
+  margin: 10px;
+}
+
+.contenido {
+  position: absolute;
+  bottom: 0;
+  /* Estilos para el contenido */
+}
+
+
+:host ::ng-deep .p-menu {
+  border: 1px rgb(183, 217, 248);
+  border-style: solid;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px 0px rgb(0, 81, 128);
+}
+
+:host ::ng-deep .p-menu .p-menuitem-link .p-menuitem-text {
+  color: #d4dde7;
+}
+
+.button-menu {
+
+    background: #212944;
+    color: gray;
+    border: 0px;
+    margin: auto;
+}
+
+.posicion-menu {
+  position: absolute;
+  height: 100%;
+  left: 0%;
+  width: 1.5cm;
+  background-color:#212944
+}

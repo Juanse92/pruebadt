@@ -1,0 +1,203 @@
+<p-panel header="Lista de vehiculos registrados">
+    <p-table #dt autoLayout="true" selectionMode="single" [(selection)]="selectVehiculo" [value]="listVehiculoCopy" [paginator]="true" [rows]="10" >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="id">
+                    Id
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="marca">
+                    Marca
+                    <p-sortIcon field="marca"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modelo">
+                    Modelo
+                    <p-sortIcon field="modelo"></p-sortIcon>
+                </th>
+                <th pSortableColumn="motor">
+                    Motor
+                    <p-sortIcon field="motor"></p-sortIcon>
+                </th>
+                <th pSortableColumn="placa">
+                    placa
+                    <p-sortIcon field="placa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="vinculacion">
+                    Vinculación
+                    <p-sortIcon field="vinculacion"></p-sortIcon>
+                </th>
+            </tr>
+            <tr class="filters">
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'id', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'marca', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'modelo', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'motor', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'placa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'vinculacion', 'contains')">
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-vehiculo>
+
+            <tr [pSelectableRow]="vehiculo">
+                <td class="p-text-center">{{vehiculo?.id}}</td>
+                <td class="p-text-center">{{vehiculo?.marca}}</td>
+                <td class="p-text-center">{{vehiculo?.modelo}}</td>
+                <td class="p-text-center">{{vehiculo?.motor}}</td>
+                <td class="p-text-center">{{vehiculo?.placa}}</td>
+                <td [class]="vehiculo.vinculacion=='Afiliado'?'verde':'rojo'">{{vehiculo?.vinculacion}}</td>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="summary" let-rowData let-vehiculo>
+
+            <div>
+                <button 
+                    class="p-button-primary" 
+                    pButton type="button" 
+                    icon="pi pi-plus" 
+                    label="Adicionar" 
+                    (click)="visible=true;flagEdit=false;form.reset()"
+                    ></button>
+                <button 
+                    class="p-button-success" 
+                    pButton type="button" 
+                    icon="pi pi-pencil" 
+                    label="Modificar/Consultar"
+                    (click)="visible=true;datosModificar()"
+                    [disabled]="!selectVehiculo"
+                    ></button>
+            </div>         
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5" class="p-text-center">No hay vehiculos registrados
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>
+
+<p-dialog header="Registro del vehiculo" [(visible)]="visible" [style]="{width: '80%'}">
+    <div id="form-modal"> 
+        <form [formGroup]="form">
+            <div class="form-group row">
+                <label for="placa" class="col-form-label col-sm-12 col-md-2">Placa*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="placa">
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="motor" class="col-form-label col-sm-12 col-md-2">Motor*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="motor">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="chasis" class="col-form-label col-sm-12 col-md-2">Chasis*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="chasis">
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="modelo" class="col-form-label col-sm-12 col-md-2">Modelo*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="modelo">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="fechaMatricula" class="col-form-label col-sm-12 col-md-2">Fecha matricula*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <p-calendar appendTo="body" formControlName="fechaMatricula"></p-calendar>
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="pasajerosSentados" class="col-form-label col-sm-12 col-md-2">Pasajeros sentados*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="pasajerosSentados">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="pasajerosPie" class="col-form-label col-sm-12 col-md-2">Pasajeros de pie*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="pasajerosPie">
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="pesoSeco" class="col-form-label col-sm-12 col-md-2">Peso seco(kg)*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="pesoSeco">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="pesoBruto" class="col-form-label col-sm-12 col-md-2">Peso bruto(kg)*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="pesoBruto">
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="numeroPuertas" class="col-form-label col-sm-12 col-md-2">Numero puertas*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="numeroPuertas">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="marca" class="col-form-label col-sm-12 col-md-2">Marca*:</label>
+                <div class="col-sm-12 col-md-3">
+                    <input type="text" formControlName="marca">
+                </div>
+                <div class="col-sm-12 col-md-1">&nbsp;</div>
+                <label for="linea" class="col-form-label col-sm-12 col-md-2">Linea*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="linea">
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="flagEdit">
+                <label for="marca" class="col-form-label col-sm-12 col-md-2">¿Vehiculo afiliado (Sí/No)?:</label>
+                <div class="col-sm-12 col-md-3">
+                    <p-radioButton name="vinculado" value="1" formControlName="vinculado" label="Sí"></p-radioButton><br>
+                    <p-radioButton name="vinculado" value="0" formControlName="vinculado" label="No"></p-radioButton>
+                </div>
+            </div>
+        </form>
+        <br>
+        <div style="display: flex; flex-direction: row-reverse;">
+            <ng-container *ngIf="!flagEdit">
+                    <button pButton type="button" 
+                    icon="pi pi-plus" 
+                    title="Guardar vehiculo" 
+                    class="p-button-dialog"
+                    label="Guardar"
+                    (click)="guardarmodificarVehiculo()">
+                </button>
+            </ng-container>
+            <ng-container *ngIf="flagEdit">
+                <button pButton type="button" 
+                icon="pi pi-pencil" 
+                title="Modificar vehiculo" 
+                class="p-button-dialog"
+                label="Modificar"
+                (click)="guardarmodificarVehiculo()">
+            </button>
+        </ng-container>
+        </div>
+    </div>
+</p-dialog>

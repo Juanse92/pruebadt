@@ -1,0 +1,19 @@
+:host ::ng-deep .p-dropdown{
+    width: 100%;
+  }
+
+.input{
+    width: 100%;
+}
+
+.row{
+    margin: 6px;
+}
+
+.headerPanel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+}

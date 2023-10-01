@@ -1,0 +1,265 @@
+<p-panel header="Lista de conductores registrados">
+    <p-table #dt autoLayout="true" selectionMode="single" [(selection)]="selectConductor" [value]="listConducto" [paginator]="true" [rows]="10" >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="nombre">
+                    Nombre
+                    <p-sortIcon field="nombre"></p-sortIcon>
+                </th>
+                <th pSortableColumn="pais">
+                    Pais
+                    <p-sortIcon field="pais"></p-sortIcon>
+                </th>
+                <th pSortableColumn="departamento">
+                    Departamento
+                    <p-sortIcon field="departamento"></p-sortIcon>
+                </th>
+                <th pSortableColumn="ciudad">
+                    Ciudad
+                    <p-sortIcon field="ciudad"></p-sortIcon>
+                </th>
+                <th pSortableColumn="telefono">
+                    Teléfono
+                    <p-sortIcon field="telefono"></p-sortIcon>
+                </th>
+                <th pSortableColumn="telefono">
+                    Asignar Vehiculo
+                </th>
+            </tr>
+            <tr class="filters">
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'nombre', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'pais', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'departamento', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'ciudad', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'telefono', 'contains')">
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-conductor>
+
+            <tr [pSelectableRow]="conductor">
+                <td>{{conductor?.nombre}}</td>
+                <td>{{conductor?.pais}}</td>
+                <td>{{conductor?.departamento}}</td>
+                <td>{{conductor?.ciudad}}</td>
+                <td>{{conductor?.telefono}}</td>
+                <td><button 
+                    class="p-button-primary" 
+                    pButton type="button" 
+                    icon="pi pi-car" 
+                    (click)="dialogVehiculo(conductor)"
+                    ></button></td>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="summary" let-rowData let-conductor>
+
+            <div>
+                <button 
+                    class="p-button-primary" 
+                    pButton type="button" 
+                    icon="pi pi-plus" 
+                    label="Adicionar" 
+                    (click)="visible=true;flagEdit=false;form.reset()"
+                    ></button>
+                <button 
+                    class="p-button-success" 
+                    pButton type="button" 
+                    icon="pi pi-pencil" 
+                    label="Modificar/Consultar"
+                    (click)="visible=true;datosModificar()"
+                    [disabled]="!selectConductor"
+                    ></button>
+            </div>         
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5" class="p-text-center">No hay conductores registrados
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>
+
+<p-dialog  header="Registro del conductor" [(visible)]="visible" [style]="{width: '80%'}">
+    <div id="form-modal"> 
+        <form [formGroup]="form">
+            <div class="form-group row">
+                <label for="tipoDocumento" class="col-form-label col-sm-12 col-md-2">Tipo de documento*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <p-dropdown appendTo="body" placeholder="Seleccione el tipo" [filter]="true" [options]="tipoDocumentoPersona"  optionLabel="label" formControlName="tipoDocumento"></p-dropdown>
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="numeroIdentificacion" class="col-form-label col-sm-12 col-md-2">Numero de Identificacion*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="numeroIdentificacion">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label col-sm-12 col-md-2">Nombre*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="nombre">
+                </div>
+                <div class="col-sm-12 col-md-2">&nbsp;</div>
+                <label for="telefono" class="col-form-label col-sm-12 col-md-2">Teléfono*:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="number" formControlName="telefono">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="pais" class="col-form-label col-sm-12 col-md-2">País*:</label>
+                <div class="col-sm-12 col-md-3">
+                    <p-dropdown appendTo="body" placeholder="Seleccione el pais" [filter]="true" [options]="paises"  optionLabel="label" formControlName="pais"></p-dropdown>
+                </div>
+                <div class="col-sm-12 col-md-1">&nbsp;</div>
+                <label for="departamento" class="col-form-label col-sm-12 col-md-2">Departamento*:</label>
+                <div class="col-sm-12 col-md-3">
+                    <p-dropdown appendTo="body" placeholder="Seleccione el departamento" [filter]="true" [options]="departamentos"  optionLabel="label" formControlName="departamento"></p-dropdown>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="ciudad" class="col-form-label col-sm-12 col-md-2">Ciudad*:</label>
+                <div class="col-sm-12 col-md-3">
+                    <p-dropdown appendTo="body" placeholder="Seleccione la ciudad" [filter]="true" [options]="cidudades"  optionLabel="label" formControlName="ciudad"></p-dropdown>
+                </div>
+                <div class="col-sm-12 col-md-1">&nbsp;</div>
+                <label for="telefono" class="col-form-label col-sm-12 col-md-2">Dirección:</label>
+                <div class="col-sm-12 col-md-2">
+                    <input type="text" formControlName="direccion">
+                </div>
+            </div>
+        </form>
+        <br>
+        <div style="display: flex; flex-direction: row-reverse;">
+            <ng-container *ngIf="!flagEdit">
+                    <button pButton type="button" 
+                    icon="pi pi-plus" 
+                    title="Guardar vehiculo" 
+                    class="p-button-dialog"
+                    label="Guardar"
+                    (click)="guardarmodificarVehiculo()">
+                </button>
+            </ng-container>
+            <ng-container *ngIf="flagEdit">
+                <button pButton type="button" 
+                icon="pi pi-pencil" 
+                title="Modificar vehiculo" 
+                class="p-button-dialog"
+                label="Modificar"
+                (click)="guardarmodificarVehiculo()">
+            </button>
+        </ng-container>
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog [header]="'Asignación de vehiculos/Conductor '+ nombreCondutor" [(visible)]="visible2" [style]="{width: '80%'}">
+    <p-table #dt autoLayout="true" dataKey="id"  selectionMode="multiple" [(selection)]="selectVehiculo" [value]="listVehiculo" [paginator]="true" [rows]="10" *ngIf="visible2">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="id">
+                    Id
+                    <p-sortIcon field="id"></p-sortIcon>
+                </th>
+                <th pSortableColumn="marca">
+                    Marca
+                    <p-sortIcon field="marca"></p-sortIcon>
+                </th>
+                <th pSortableColumn="modelo">
+                    Modelo
+                    <p-sortIcon field="modelo"></p-sortIcon>
+                </th>
+                <th pSortableColumn="motor">
+                    Motor
+                    <p-sortIcon field="motor"></p-sortIcon>
+                </th>
+                <th pSortableColumn="placa">
+                    placa
+                    <p-sortIcon field="placa"></p-sortIcon>
+                </th>
+            </tr>
+            <tr class="filters">
+                <td></td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'id', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'marca', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'modelo', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'motor', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'placa', 'contains')">
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-vehiculo>
+
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="vehiculo"></p-tableCheckbox>
+                </td>
+                <td>{{vehiculo?.id}}</td>
+                <td>{{vehiculo?.marca}}</td>
+                <td>{{vehiculo?.modelo}}</td>
+                <td>{{vehiculo?.motor}}</td>
+                <td>{{vehiculo?.placa}}</td>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="summary" let-rowData let-vehiculo>
+
+            <div>
+                <button 
+                    class="p-button-primary" 
+                    pButton type="button" 
+                    icon="pi pi-pencil" 
+                    label="Asignar vehiculos" 
+                    (click)="asigarVehiculos()"
+                    ></button>
+            </div>         
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5" class="p-text-center">No hay vehiculos registrados
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>

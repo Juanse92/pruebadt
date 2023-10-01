@@ -1,0 +1,122 @@
+<p-panel header="Lista de empresas registradas">
+    <p-table #dt autoLayout="true" selectionMode="single" [(selection)]="selectEmpresa" [value]="listEmpresa" [paginator]="true" [rows]="10" >
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th pSortableColumn="nombreEmpresa">
+                    Nombre Empresa
+                    <p-sortIcon field="nombreEmpresa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="paisEmpresa">
+                    País Empresa
+                    <p-sortIcon field="paisEmpresa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="departamentoEmpresa">
+                    Departamento Empresa
+                    <p-sortIcon field="departamentoEmpresa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="ciudadEmpresa">
+                    Ciudad Empresa
+                    <p-sortIcon field="ciudadEmpresa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="direccionEmpresa">
+                    Direccion Empresa
+                    <p-sortIcon field="direccionEmpresa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="telefonoEmpresa">
+                    teléfono Empresa
+                    <p-sortIcon field="telefonoEmpresa"></p-sortIcon>
+                </th>
+                <th pSortableColumn="nombreResponsable">
+                    Nombre Responsable
+                    <p-sortIcon field="nombreResponsable"></p-sortIcon>
+                </th>
+                <th pSortableColumn="telefonoesponsable">
+                    Teléfono Responsable
+                    <p-sortIcon field="telefonoesponsable"></p-sortIcon>
+                </th>
+            </tr>
+            <tr class="filters">
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'nombreEmpresa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'paisEmpresa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'departamentoEmpresa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'ciudadEmpresa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'direccionEmpresa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="number" (input)="dt.filter($event.target.value, 'telefonoEmpresa', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="text" (input)="dt.filter($event.target.value, 'inombreResponsabled', 'contains')">
+                    </div>
+                </td>
+                <td class="text-center bg-light">
+                    <div class="ui-inputgroup">
+                        <input pInputText type="number" (input)="dt.filter($event.target.value, 'telefonoesponsable', 'contains')">
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-empresa>
+
+            <tr [pSelectableRow]="empresa">
+                <td class="p-text-center">{{empresa?.nombreEmpresa}}</td>
+                <td class="p-text-center">{{empresa?.paisEmpresa}}</td>
+                <td class="p-text-center">{{empresa?.departamentoEmpresa}}</td>
+                <td class="p-text-center">{{empresa?.ciudadEmpresa}}</td>
+                <td class="p-text-center">{{empresa?.direccionEmpresa}}</td>
+                <td class="p-text-center">{{empresa?.telefonoEmpresa}}</td>
+                <td class="p-text-center">{{empresa?.nombreResponsable}}</td>
+                <td class="p-text-center">{{empresa?.telefonoesponsable}}</td>
+            </tr>
+
+        </ng-template>
+        <ng-template pTemplate="summary" let-rowData let-empresa>
+
+            <div>
+                <button 
+                    class="p-button-primary" 
+                    pButton type="button" 
+                    icon="pi pi-plus" 
+                    label="Adicionar" 
+                    [routerLink]="['/regemp']"
+                    ></button>
+                <button 
+                    class="p-button-success" 
+                    pButton type="button" 
+                    icon="pi pi-pencil" 
+                    label="Modificar"
+                    (click)="routerId()"
+                    [disabled]="!selectEmpresa"
+                    ></button>
+                </div>         
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8" class="p-text-center">No hay registro de empresas
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-panel>

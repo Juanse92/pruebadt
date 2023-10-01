@@ -1,0 +1,29 @@
+.p-button:disabled {    
+    background-color:rgba(173, 173, 173, 1) !important;
+}
+
+.p-button-success:disabled {    
+    background: #24b300 !important;
+    opacity: 1 !important;
+
+}
+
+.p-button-danger:disabled {    
+    background: #EF9A9A !important;
+    opacity: 1 !important;
+
+}
+
+
+.p-button-warning:disabled {    
+    background: #b1ff9d !important;
+    opacity: 1 !important;
+
+}
+
+.p-button-primary:disabled {    
+    background: #0064b6 !important;
+    opacity: 1 !important;
+
+}
+
