@@ -15,7 +15,7 @@ npm i
 
 ## Proyecto(Spring bd)
 Para compilar el código sin necesidad de cambiar las conexiones de la bd, se debe contar con postgreSQL y crear un servidor con:
-nombre: DatosPersona
+Base de datos: DatosPersona
 Username: postgres
 Password: karen92
 
